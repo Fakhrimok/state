@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import TimeSinceMount from "./TimeSinceMount";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      fullName: "Fakhri Mokni",
+      bio: "Ex Helicopter Pilot",
+      profession: "A Wannabe Developper",
+      show: false,
+      mountTime: Date.now(),
+    };
+  }
+  show = () => {
+    this.setState({ show: !this.state.show });
+  };
+  render() {
+    const { mountTime } = this.state;
+    return (
+      <div>
+        {this.state.show ? (
+          <div
+            style={{
+              margin: "auto",
+              width: 500,
+              color: "white",
+              backgroundColor: "DodgerBlue",
+              padding: "10px",
+              fontFamily: "Sans-Serif",
+              borderRadius: 15,
+              textAlign: "center",
+            }}
+          >
+            <img
+              style={{ width: 400, borderRadius: 45 }}
+              src="https://wallpapers.com/images/featured/87h46gcobjl5e4xu.jpg"
+            />
+            <p>{this.state.fullName}</p> <p>{this.state.bio}</p>
+            <p>{this.state.profession}</p>
+          </div>
+        ) : null}
+        <button
+          onClick={this.show}
+          style={{
+            display: "block",
+            width: 50,
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: 25,
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+          Magic
+        </button>
+        <div>
+          <TimeSinceMount mountTime={mountTime} />
+        </div>
+      </div>
+    );
+  }
 }
-
-export default App;
